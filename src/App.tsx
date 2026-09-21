@@ -33,6 +33,7 @@ export default function App() {
   const [screen, setScreen] = useState<Screen>('login');
   const [showInstallPrompt, setShowInstallPrompt] = useState(false);
   const [installPromptEvent, setInstallPromptEvent] = useState<BeforeInstallPromptEvent | null>(null);
+  const [showManualInstallMessage, setShowManualInstallMessage] = useState(false);
 
   useEffect(() => {
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches || (window.navigator as Navigator & { standalone?: boolean }).standalone;
@@ -68,13 +69,17 @@ export default function App() {
 
   const handleInstallApp = async () => {
     if (!installPromptEvent) {
-      dismissInstallPrompt();
+      setShowManualInstallMessage(true);
       return;
     }
 
-    await installPromptEvent.prompt();
-    await installPromptEvent.userChoice;
-    dismissInstallPrompt();
+    try {
+      await installPromptEvent.prompt();
+      await installPromptEvent.userChoice;
+      dismissInstallPrompt();
+    } catch {
+      setShowManualInstallMessage(true);
+    }
   };
 
   const nav = (s: Screen) => setScreen(s);
@@ -154,6 +159,12 @@ export default function App() {
               Open your browser menu and tap “Add to Home Screen” or “Install app”.
             </div>
 
+            {showManualInstallMessage && (
+              <div style={{ background: '#FFF7ED', borderRadius: 14, padding: '12px 14px', marginBottom: 18, color: '#9A3412', fontSize: 14, lineHeight: 1.5, fontWeight: 600 }}>
+                Your browser does not provide a one-tap install prompt here. Use the browser menu above to install Nirikshak.
+              </div>
+            )}
+
             <div style={{ display: 'flex', gap: 12, flexDirection: 'column' }}>
               <button
                 onClick={handleInstallApp}
@@ -168,7 +179,7 @@ export default function App() {
                   cursor: 'pointer',
                 }}
               >
-                Install App
+                {installPromptEvent ? 'Install App' : 'Show Install Steps'}
               </button>
               <button
                 onClick={dismissInstallPrompt}
