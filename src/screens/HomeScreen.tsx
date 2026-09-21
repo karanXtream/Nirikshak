@@ -21,7 +21,7 @@ function NavBar({ active, nav }: { active: string; nav: (s: Screen) => void }) {
     { id: 'profile', label: 'Profile', screen: 'profile' as Screen, Icon: UserIcon },
   ];
   return (
-    <div className="flex items-center justify-around py-2 border-t" style={{ borderColor: '#E0E0E0', background: '#fff' }}>
+    <div className="flex flex-shrink-0 items-center justify-around border-t py-2" style={{ borderColor: '#E0E0E0', background: '#fff', paddingBottom: 'calc(0.5rem + env(safe-area-inset-bottom))' }}>
       {items.map(item => {
         const color = active === item.id ? '#1A3A6B' : '#9E9E9E';
         return (

@@ -161,7 +161,7 @@ export default function App() {
 
             {showManualInstallMessage && (
               <div style={{ background: '#FFF7ED', borderRadius: 14, padding: '12px 14px', marginBottom: 18, color: '#9A3412', fontSize: 14, lineHeight: 1.5, fontWeight: 600 }}>
-                Your browser does not provide a one-tap install prompt here. Use the browser menu above to install Nirikshak.
+                Android: open the Chrome menu and choose “Install app” or “Add to Home screen”. iPhone: tap Share, then “Add to Home Screen”.
               </div>
             )}
 

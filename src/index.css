@@ -44,13 +44,16 @@ body {
 
 .app-root {
   width: 100%;
-  min-height: 100vh;
+  height: 100dvh;
+  min-height: 100dvh;
+  overflow: hidden;
   background: transparent;
 }
 
 .app-root > * {
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
+  min-height: 0;
 }
 
 .scrollbar-hide {
