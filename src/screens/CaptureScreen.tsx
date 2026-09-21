@@ -129,12 +129,12 @@ export default function CaptureScreen({ nav }: { nav: (s: Screen) => void }) {
           <span className="text-xs font-semibold text-white">Reference card</span>
         </div>
 
-        <p className="absolute bottom-20 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-3 py-1.5 text-xs font-medium" style={{ background: 'rgba(0,0,0,0.72)', color: 'rgba(255,255,255,0.9)' }}>
+        <p className="absolute left-4 right-4 top-14 rounded-lg px-3 py-1.5 text-center text-xs font-medium" style={{ background: 'rgba(0,0,0,0.72)', color: 'rgba(255,255,255,0.9)' }}>
           Place reference card next to product
         </p>
 
         <div className="absolute bottom-4 left-4 right-4 text-center">
-          <div className="flex items-center justify-center gap-2">
+          <div className="flex flex-wrap items-center justify-center gap-2">
             <button
               onClick={captureImage}
               className="rounded-xl px-5 py-2.5 text-sm font-bold shadow-lg"
