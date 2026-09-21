@@ -1,0 +1,10 @@
+{
+  "description": "Enables Legal Metrology Officers to efficiently inspect packaged product labels for compliance with government standards using offline smart tools and AI analysis.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
