@@ -4,6 +4,7 @@ import type { Screen } from '../App';
 
 export default function CaptureScreen({ nav }: { nav: (s: Screen) => void }) {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const captureInputRef = useRef<HTMLInputElement | null>(null);
   const [flash, setFlash] = useState(false);
   const [grid, setGrid] = useState(true);
   const [selectedUploadType, setSelectedUploadType] = useState<'single' | null>('single');
@@ -13,6 +14,11 @@ export default function CaptureScreen({ nav }: { nav: (s: Screen) => void }) {
   const uploadImage = () => {
     setSelectedUploadType('single');
     fileInputRef.current?.click();
+  };
+
+  const captureImage = () => {
+    setSelectedUploadType('single');
+    captureInputRef.current?.click();
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,6 +83,14 @@ export default function CaptureScreen({ nav }: { nav: (s: Screen) => void }) {
           hidden
           onChange={handleFileChange}
         />
+        <input
+          ref={captureInputRef}
+          type="file"
+          accept="image/*"
+          capture="environment"
+          hidden
+          onChange={handleFileChange}
+        />
 
         <div className="absolute inset-0" style={{
           background: hasUploadedImage
@@ -110,14 +124,32 @@ export default function CaptureScreen({ nav }: { nav: (s: Screen) => void }) {
           )}
         </div>
 
+        <div className="absolute top-4 left-4 flex items-center gap-1.5 rounded-full px-2.5 py-1.5" style={{ background: 'rgba(0,0,0,0.72)' }}>
+          <span className="h-2 w-2 rounded-full" style={{ background: '#EF4444' }} />
+          <span className="text-xs font-semibold text-white">Reference card</span>
+        </div>
+
+        <p className="absolute bottom-20 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-3 py-1.5 text-xs font-medium" style={{ background: 'rgba(0,0,0,0.72)', color: 'rgba(255,255,255,0.9)' }}>
+          Place reference card next to product
+        </p>
+
         <div className="absolute bottom-4 left-4 right-4 text-center">
-          <button
-            onClick={uploadImage}
-            className="px-5 py-2.5 rounded-xl text-sm font-bold shadow-lg"
-            style={{ background: '#f0f0f0', color: '#111827' }}
-          >
-            Upload Image
-          </button>
+          <div className="flex items-center justify-center gap-2">
+            <button
+              onClick={captureImage}
+              className="rounded-xl px-5 py-2.5 text-sm font-bold shadow-lg"
+              style={{ background: '#2E7D32', color: '#fff' }}
+            >
+              Capture
+            </button>
+            <button
+              onClick={uploadImage}
+              className="rounded-xl px-5 py-2.5 text-sm font-bold shadow-lg"
+              style={{ background: '#f0f0f0', color: '#111827' }}
+            >
+              Upload Image
+            </button>
+          </div>
           <p className="mt-3 text-xs font-medium px-3 py-1.5 rounded-lg inline-block" style={{ background: 'rgba(0,0,0,0.7)', color: 'rgba(255,255,255,0.85)' }}>
             Select any product image to continue
           </p>
